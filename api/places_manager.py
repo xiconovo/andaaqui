@@ -1,13 +1,9 @@
-from curses import meta
 from flask import Blueprint, request
-from flask_bcrypt import Bcrypt
 from flask_login import (
     login_required,
-    current_user,
 )
 from models import db, Place
 from sqlalchemy.sql import text
-import json
 
 places_bp = Blueprint("places", __name__, url_prefix="/places")
 
@@ -64,7 +60,7 @@ def create():
     return {"status": "ok", "msg": "Place added successfully"}, 200
 
 
-@places_bp.route("/delete")
+@places_bp.route("/delete", methods=["DELETE"])
 @login_required
 def delete():
     print("delete place")

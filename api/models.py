@@ -16,3 +16,10 @@ class Place(db.Model):
     name = db.Column(db.String(80), nullable=False, unique=True)
     lat = db.Column(db.Float, nullable=False)
     long = db.Column(db.Float, nullable=False)
+
+
+class List(db.Model):
+    __table_args__ = (db.UniqueConstraint("user_id", "name", name="unique_per_user"),)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)

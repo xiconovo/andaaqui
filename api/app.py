@@ -1,10 +1,8 @@
-from crypt import methods
-import bcrypt
-from flask import Flask, Blueprint, request, abort, jsonify
-
+from flask import Flask
 from auth_manager import auth, bcrypt, login_manager
 from places_manager import places_bp
-from models import db, User
+from lists_manager import lists_bp
+from models import db
 
 app = Flask(__name__)
 
@@ -23,6 +21,7 @@ def start_server():
     login_manager.init_app(app)
     app.register_blueprint(auth)
     app.register_blueprint(places_bp)
+    app.register_blueprint(lists_bp)
     app.run(port=8080, debug=True)
 
 
