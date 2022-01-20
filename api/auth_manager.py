@@ -1,18 +1,25 @@
 from flask import Blueprint, request
-from models import User
 from flask_bcrypt import Bcrypt
-from flask_login import login_user, LoginManager, login_required, logout_user, current_user
-from models import db
+from flask_login import (
+    login_user,
+    LoginManager,
+    login_required,
+    logout_user,
+    current_user,
+)
+from models import db, User
 
-auth = Blueprint('auth', __name__)
+auth = Blueprint("auth", __name__)
 bcrypt = Bcrypt()
 login_manager = LoginManager()
+
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-@auth.route('/login')
+
+@auth.route("/login", methods=["POST"])
 def login():
     username = request.json["username"]
     password = request.json["password"]
@@ -23,10 +30,11 @@ def login():
             return {"status": "ok", "msg": "Login success"}, 200
         else:
             print("Password errada")
-        
+
     return {"status": "failed", "msg": "Login failed"}, 401
 
-@auth.route('/register', methods=['POST'])
+
+@auth.route("/register", methods=["POST"])
 def register():
     try:
         username = request.json["username"]
@@ -39,10 +47,11 @@ def register():
         return {"status": "failed", "msg": "Ivalid request body"}, 401
     except Exception as e:
         return {"status": "failed", "msg": f"{e}"}, 401
-    
+
     return {"status": "ok", "msg": "User registered with success"}, 201
 
-@auth.route('/logout')
+
+@auth.route("/logout")
 @login_required
 def logout():
     logout_user()
