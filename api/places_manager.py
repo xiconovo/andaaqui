@@ -2,7 +2,7 @@ from flask import Blueprint, request
 from flask_login import (
     login_required,
 )
-from models import db, Place
+from models import db, Place, list_entries
 from sqlalchemy.sql import text
 
 places_bp = Blueprint("places", __name__, url_prefix="/places")
@@ -70,7 +70,10 @@ def delete():
         return {"status": "failed", "msg": "Ivalid request body"}, 401
 
     try:
-        Place.query.filter_by(name=name).delete()
+        place_query = Place.query.filter_by(name=name)
+        place = place_query.first()
+        db.session.query(list_entries).filter_by(place_id=place.id).delete()
+        place_query.delete()
         db.session.commit()
     except Exception as e:
         print(e)
