@@ -1,10 +1,12 @@
 from flask import Flask
+from flask_cors import CORS 
 from auth_manager import auth, bcrypt, login_manager
 from places_manager import places_bp
 from lists_manager import lists_bp
 from models import db
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route("/")
