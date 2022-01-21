@@ -32,7 +32,7 @@ def search():
     return {
         "status": "ok",
         "places": [
-            {"name": place.name, "lat": place.lat, "long": place.lat}
+            {"id": place.id, "name": place.name, "lat": place.lat, "long": place.lat}
             for place in places
         ],
     }, 200

@@ -11,11 +11,32 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(80), nullable=False, unique=True)
 
 
+list_entries = db.Table(
+    "list_entries",
+    db.Column(
+        "place_id",
+        db.Integer,
+        db.ForeignKey("place.id"),
+        primary_key=True,
+    ),
+    db.Column(
+        "list_id",
+        db.Integer,
+        db.ForeignKey("list.id"),
+        primary_key=True,
+    ),
+)
+
 class Place(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False, unique=True)
     lat = db.Column(db.Float, nullable=False)
     long = db.Column(db.Float, nullable=False)
+    lists = db.relationship(
+        "List",
+        secondary=list_entries,
+        backref=db.backref("places", cascade="all,delete"),
+    )
 
 
 class List(db.Model):
