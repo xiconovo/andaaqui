@@ -83,7 +83,10 @@ def delete():
         return {"status": "failed", "msg": "Ivalid request body"}, 401
 
     try:
-        List.query.filter_by(user_id=current_user.id, name=name).delete()
+        list_query = List.query.filter_by(user_id=current_user.id, name=name)
+        the_list = list_query.first()
+        db.session.query(list_entries).filter_by(list_id=the_list.id).delete()
+        list_query.delete()
         db.session.commit()
     except Exception as e:
         print(e)
