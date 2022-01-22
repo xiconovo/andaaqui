@@ -46,7 +46,7 @@ def register():
     except KeyError as e:
         return {"status": "failed", "msg": "Ivalid request body"}, 401
     except Exception as e:
-        return {"status": "failed", "msg": f"{e}"}, 401
+        return {"status": "failed", "msg": "Register failed"}, 401
 
     return {"status": "ok", "msg": "User registered with success"}, 201
 

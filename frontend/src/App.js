@@ -12,9 +12,6 @@ const App = () => {
   const [isLogged, setIsLogged] = useState(false)
   const [username, setUsername] = useState('')
 
-  useEffect(() => {
-    isLoggedIn()
-  }, [])
 
   const executeLogin = async (user) => {
     console.log("User", user)
@@ -26,13 +23,16 @@ const App = () => {
       },
       body: JSON.stringify(user),
     })
-    setIsLogged(res.status === 200)
-    setUsername(user.username)
-    const data = await res.json()
-    console.log("login res", data, isLogged)
-    return data
+    if (res.status === 200) {
+      setIsLogged(true)
+      setUsername(user.username)
+    } else {
+      alert('Login failed')
+    }
+    // const data = await res.json()
+    console.log("login res", isLogged)
   }
-  
+
   const isLoggedIn = async () => {
     const res = await fetch('http://localhost:8080/auth', {
       credentials: 'include'
@@ -49,9 +49,30 @@ const App = () => {
     console.log("is login res", isLogged, username)
   }
 
+  const executeRegister = async (user) => {
+    console.log("Register User", user)
+    const res = await fetch('http://localhost:8080/register', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    })
+    console.log("RES", res)
+    if (res.status === 201) {
+      const data = await res.json()
+      console.log("Register successs:", data.msg)
+      await executeLogin(user)
+    } else if (res.status === 401) {
+      const data = await res.json()
+      console.log("Register failed:", data.msg)
+      alert(`Register Failed: ${data.msg}`)
+    }
+  }
+
   const executeLogout = async () => {
     console.log("Logout")
-    const res = await fetch('http://localhost:8080/logout', {
+    await fetch('http://localhost:8080/logout', {
       credentials: 'include',
     })
     setIsLogged(false)
@@ -59,15 +80,16 @@ const App = () => {
     console.log("is login res", isLogged, username)
   }
 
-
-
+  useEffect(() => {
+    isLoggedIn()
+  }, [])
 
   return (
     <>
-      { isLogged ? <HeaderLoggedIn username={username} onLogout={executeLogout}/> :
+      {isLogged ? <HeaderLoggedIn username={username} onLogout={executeLogout} /> :
         <>
-        <HeaderLogin onLogin={executeLogin}/>
-        <BodySignup />
+          <HeaderLogin onLogin={executeLogin} />
+          <BodySignup onSignUp={executeRegister} />
         </>}
 
       <button onClick={executeLogout}>Logout</button>
