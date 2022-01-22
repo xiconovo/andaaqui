@@ -51,6 +51,12 @@ def register():
     return {"status": "ok", "msg": "User registered with success"}, 201
 
 
+@auth.route("/auth")
+@login_required
+def isauth():
+    return {"username": current_user.username}, 200
+
+
 @auth.route("/logout")
 @login_required
 def logout():

@@ -13,11 +13,8 @@ class User(db.Model, UserMixin):
 
 list_entries = db.Table(
     "list_entries",
-    db.Column("place_id", db.Integer, db.ForeignKey("place.id")),
-    db.Column("list_id", db.Integer, db.ForeignKey("list.id")),
-    __table_args__=(
-        db.UniqueConstraint("place_id", "list_id", name="unique_per_list"),
-    ),
+    db.Column("place_id", db.Integer, db.ForeignKey("place.id"),primary_key=True),
+    db.Column("list_id", db.Integer, db.ForeignKey("list.id"),primary_key=True)
 )
 
 

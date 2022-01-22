@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* .header{
+    height: 7vh;
+    background-color: rgb(9, 36, 58);
+} */
+
+
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+
+
+
+
+/* HeaderLogin */
+.header-login {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px;
+  background-color: rgb(9, 36, 58);
+}
+
+.input-login{
+  height: 32px;
+  font-size: 20px;
+  outline: none;
+  width: 200px;
+  margin-top: 15px;
+  margin-left: 20px;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-bottom-style: 2px solid black;
+  margin-bottom: 10px;
+}
+
+.submit-button{
+  text-transform: uppercase;
+  font-size: 20px;
+  border-radius: 10px;
+  color: #fff;
+  padding: 5px 40px;
+  background:  #074d6d;
+  margin-left: 20px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+/* Body Signup */
+.bodySignup {
+  background-image: url(images/background.jpg);
+  /* background-size: 100%; */
+  width: 100%;
+  height: 100%;
+}
+
+.logo{
+  width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.signupContainer {
+  align-self: center;
+  max-width: 600px;
+  max-height: 600px;
+}
+
+
+/* SignUpForm */
+/* .bottom{
+  background-image: url("https://media.cntraveler.com/photos/5edfc029b16364ea435ca862/4:3/w_2664,h_1998,c_limit/Roadtrip-2020-GettyImages-1151192650.jpg");
+  width: 100%;
+  height: 93vh;
+} */
+
+.title{
+  font-family: Arial, Helvetica, sans-serif;
+  color: #fff;
+  text-align: center;
+}
+
+.form-wrapper{
+  background-color: rgb(9, 36, 58);
+  /* min-width: 350px;
+  min-height: 650px; */
+  padding: 30px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  align-items: center;
+  max-width: 500px;
+
+}
+
+.input{
+  height: 32px;
+  font-size: 20px;
+  outline: none;
+  width: 100%;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  border-bottom-style: 2px solid black;
+  margin-bottom: 10px;
+}
+
+.username,
+.email,
+.password{
+    margin: 20px;
+    color: #969292;
+    font-size: 16px;
+}
