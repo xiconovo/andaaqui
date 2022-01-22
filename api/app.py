@@ -6,7 +6,7 @@ from lists_manager import lists_bp
 from models import db
 
 app = Flask(__name__, static_folder='../frontend/build/', static_url_path="/")
-CORS(app)
+CORS(app, supports_credentials=True)
 
 
 @app.route("/")
