@@ -86,14 +86,14 @@ const App = () => {
 
   return (
     <>
-      {isLogged ? <HeaderLoggedIn username={username} onLogout={executeLogout} /> :
+      {isLogged ? <>
+        <HeaderLoggedIn username={username} onLogout={executeLogout} />
+        <BodyMap />
+      </> :
         <>
           <HeaderLogin onLogin={executeLogin} />
           <BodySignup onSignUp={executeRegister} />
         </>}
-
-      <button onClick={executeLogout}>Logout</button>
-      <button onClick={isLoggedIn}>IsLogged</button>
     </>
   );
 }
