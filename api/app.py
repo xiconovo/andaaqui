@@ -3,6 +3,7 @@ from flask_cors import CORS
 from auth_manager import auth, bcrypt, login_manager
 from places_manager import places_bp
 from lists_manager import lists_bp
+from comments_manager import comments_bp
 from models import db
 
 app = Flask(__name__, static_folder='../frontend/build/', static_url_path="/")
@@ -23,6 +24,7 @@ def start_server():
     app.register_blueprint(auth)
     app.register_blueprint(places_bp)
     app.register_blueprint(lists_bp)
+    app.register_blueprint(comments_bp)
     app.run(port=8080, debug=True)
 
 

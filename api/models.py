@@ -32,3 +32,11 @@ class List(db.Model):
     name = db.Column(db.String(80), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     places = db.relationship("Place", secondary=list_entries, back_populates="lists")
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    comment = db.Column(db.String(200), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    place_id = db.Column(db.Integer,db.ForeignKey("place.id"),nullable=False)
+
+
