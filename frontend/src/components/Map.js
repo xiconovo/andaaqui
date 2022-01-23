@@ -6,11 +6,12 @@ import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 const mapContainerStyle = {
     position: 'static!important',
     width: '70vw',
-    height: '100vh'
+    height: 'calc(100vh-61px)'
 };
 
-function Map({ coordinates }) {
-    const [markers, setMarkers] = useState([]);
+function Map({ coordinates, setCord }) {
+    const [marker, setMarker] = useState({});
+    const [isMarked, setIsMarked] = useState(false);
 
 
     return (
@@ -23,19 +24,20 @@ function Map({ coordinates }) {
                 clickableIcons={false}
                 zoom={15}
                 onClick={(event) => {
-
-                    setMarkers(current => [...current, {
+                    setCord({ lat: event.latLng.lat(), long: event.latLng.lng() })
+                    setMarker({
                         lat: event.latLng.lat(),
                         lng: event.latLng.lng(),
                         time: new Date(),
-                    }])
+                    })
+                    setIsMarked(true)
                 }}
             >
-                {/* {markers.map(marker => (
-                    <Marker key={marker.time.toISOString()}
-                        position={{ lat: marker.lat, lng: marker.lng }}
-                    />
-                ))} */}
+
+                {isMarked && <Marker key={marker.time.toISOString()}
+                    position={{ lat: marker.lat, lng: marker.lng }}
+                />}
+
             </GoogleMap>
         </LoadScript>
     )

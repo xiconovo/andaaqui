@@ -17,11 +17,18 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 /* HeaderLogin */
 .header-login {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 61px;
   padding: 2px;
   background-color: rgb(9, 36, 58);
 }
@@ -38,6 +45,22 @@ body {
   border-right-style: none;
   border-bottom-style: 2px solid black;
   margin-bottom: 10px;
+}
+
+
+input .input-radius {
+  background-color: white;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding-left: 40px;
+}
+
+.input-radius{
+  height: 32px;
+  font-size: 20px;
+  outline: none;
+  width: 150px;
+  text-align: center;
 }
 
 .submit-button{
@@ -130,7 +153,8 @@ body {
 .vertical-menu {
   display: block;
   width: 30vw;
-  height: 100vh;
+  height: calc(100vh - 61px);
+  max-height: calc(100vh - 61px);
   overflow-y: auto;
 }
 
@@ -155,4 +179,9 @@ body {
 
 .mapalista{
   display: flex;
+  height: calc(100vh - 61px);
+}
+
+.search-button {
+  margin-left: 0;
 }

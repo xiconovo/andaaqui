@@ -44,6 +44,7 @@ const App = () => {
       setIsLogged(true)
       setUsername(data.username)
     } else {
+      console.log("xico nabo else")
       setIsLogged(false)
     }
     console.log("is login res", isLogged, username)

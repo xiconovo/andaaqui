@@ -8,7 +8,7 @@ from sqlalchemy.sql import text
 places_bp = Blueprint("places", __name__, url_prefix="/places")
 
 
-@places_bp.route("/search")
+@places_bp.route("/search", methods=["POST"])
 @login_required
 def search():
     print("search places")

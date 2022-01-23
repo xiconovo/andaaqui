@@ -11,7 +11,7 @@ with open(sys.argv[1]) as csvfile:
     next(reader, None)  # skip the header
     for row in reader:
         print(f"Adding: {row[0]}")
-        cur.execute(f"INSERT INTO place (name, lat, long) VALUES (?, ?, ?)", (row[0], row[1], row[2]))
+        cur.execute(f"INSERT INTO place (name, lat, long) VALUES (?, ?, ?)", (row[0], float(row[1].replace(',','.')), float(row[2].replace(',','.'))))
 
     con.commit()
     con.close()
