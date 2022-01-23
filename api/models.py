@@ -13,8 +13,8 @@ class User(db.Model, UserMixin):
 
 list_entries = db.Table(
     "list_entries",
-    db.Column("place_id", db.Integer, db.ForeignKey("place.id"),primary_key=True),
-    db.Column("list_id", db.Integer, db.ForeignKey("list.id"),primary_key=True)
+    db.Column("place_id", db.Integer, db.ForeignKey("place.id"), primary_key=True),
+    db.Column("list_id", db.Integer, db.ForeignKey("list.id"), primary_key=True),
 )
 
 
@@ -33,10 +33,9 @@ class List(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     places = db.relationship("Place", secondary=list_entries, back_populates="lists")
 
+
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     comment = db.Column(db.String(200), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-    place_id = db.Column(db.Integer,db.ForeignKey("place.id"),nullable=False)
-
-
+    place_id = db.Column(db.Integer, db.ForeignKey("place.id"), nullable=False)

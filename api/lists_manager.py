@@ -37,7 +37,12 @@ def get_list():
         the_list = List.query.filter_by(name=list_name, user_id=current_user.id).first()
         if the_list is None:
             return {"status": "failed", "msg": "List not found"}, 401
-        list_places = Place.query.join(list_entries).join(List).filter(List.name == the_list.name).all()
+        list_places = (
+            Place.query.join(list_entries)
+            .join(List)
+            .filter(List.name == the_list.name)
+            .all()
+        )
     except Exception as e:
         print("Error: ", e)
         return {"status": "failed", "msg": "Search Failed"}, 401
@@ -129,7 +134,9 @@ def deleteplace():
     try:
         list = List.query.filter_by(user_id=current_user.id, name=list_name).first()
         place = Place.query.filter_by(name=place_name).first()
-        db.session.query(list_entries).filter_by(place_id=place.id, list_id=list.id).delete()
+        db.session.query(list_entries).filter_by(
+            place_id=place.id, list_id=list.id
+        ).delete()
         db.session.commit()
     except Exception as e:
         print(e)

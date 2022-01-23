@@ -1,18 +1,19 @@
 from flask import Flask, render_template
-from flask_cors import CORS 
+from flask_cors import CORS
 from auth_manager import auth, bcrypt, login_manager
 from places_manager import places_bp
 from lists_manager import lists_bp
 from comments_manager import comments_bp
 from models import db
 
-app = Flask(__name__, static_folder='../frontend/build/', static_url_path="/")
+app = Flask(__name__, static_folder="../frontend/build/", static_url_path="/")
 CORS(app, supports_credentials=True)
 
 
 @app.route("/")
 def serve():
-    return app.send_static_file('index.html')
+    return app.send_static_file("index.html")
+
 
 def start_server():
     app.config["SECRET_KEY"] = "1234567890abcd"

@@ -89,7 +89,7 @@ const App = () => {
     <>
       {isLogged ? <>
         <HeaderLoggedIn username={username} onLogout={executeLogout} />
-        <MapList/>
+        <MapList />
       </> :
         <>
           <HeaderLogin onLogin={executeLogin} />

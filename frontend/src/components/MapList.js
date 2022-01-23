@@ -40,9 +40,9 @@ const MapList = () => {
 
   return <div className='mapalista'>
     <Map coordinates={location.coordinates} setCord={setCordinates} />
-    { selectedPlace != null && <Place place={selectedPlace} selectPlace={setSelectedPlace}/>}
+    {selectedPlace != null && <Place place={selectedPlace} selectPlace={setSelectedPlace} />}
     <div>
-      <div style={{display: "flex"}}>
+      <div style={{ display: "flex" }}>
         <div>
           <input
             type="number"
@@ -52,13 +52,13 @@ const MapList = () => {
           />
           <b>KM</b>
         </div>
-        <div style={{marginLeft: "auto"}}>
-          <div style={{textAlign: "right"}}>
-            <button className='submit-button search-button'onClick={searchPlaces}>Search</button>
+        <div style={{ marginLeft: "auto" }}>
+          <div style={{ textAlign: "right" }}>
+            <button className='submit-button search-button' onClick={searchPlaces}>Search</button>
           </div>
         </div>
       </div>
-      <List places={places} selectPlace={setSelectedPlace}/>
+      <List places={places} selectPlace={setSelectedPlace} />
     </div>
 
   </div>;
