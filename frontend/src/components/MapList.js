@@ -39,9 +39,11 @@ const MapList = () => {
 
 
   return <div className='mapalista'>
-    <Map coordinates={location.coordinates} setCord={setCordinates} />
-    {selectedPlace != null && <Place place={selectedPlace} selectPlace={setSelectedPlace} />}
-    <div>
+    <div class='mapbody'>
+      <Map coordinates={location.coordinates} setCord={setCordinates} place={selectedPlace} />
+      {selectedPlace != null && <Place place={selectedPlace} selectPlace={setSelectedPlace} />}
+    </div>
+    <div className='listbody'>
       <div style={{ display: "flex" }}>
         <div>
           <input

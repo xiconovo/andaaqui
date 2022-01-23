@@ -152,9 +152,9 @@ input .input-radius {
 
 .vertical-menu {
   display: block;
-  width: 30vw;
-  height: calc(100vh - 61px);
-  max-height: calc(100vh - 61px);
+  width: 100%;
+  height: calc(100vh - 94px);
+  max-height: calc(100vh - 94px);
   overflow-y: auto;
 }
 
@@ -178,8 +178,22 @@ input .input-radius {
 }
 
 .mapalista{
-  display: flex;
+  width: 100%;
   height: calc(100vh - 61px);
+  max-height: calc(100vh - 61px);
+  display: flex;
+}
+
+.mapbody {
+  vertical-align: top;
+  display: flex;
+  width: 70%;
+}
+
+.listbody {
+  vertical-align: top;
+  display: inline-block;
+  width: 30%;
 }
 
 .search-button {

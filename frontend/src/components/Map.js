@@ -15,7 +15,7 @@ const defaultMapOptions = {
     styles: mapStyles
 };
 
-function Map({ coordinates, setCord }) {
+function Map({ coordinates, setCord, place }) {
     const [marker, setMarker] = useState({});
     const [isMarked, setIsMarked] = useState(false);
 
@@ -44,6 +44,8 @@ function Map({ coordinates, setCord }) {
                 {isMarked && <Marker key={marker.time.toISOString()}
                     position={{ lat: marker.lat, lng: marker.lng }}
                 />}
+
+                {place != null && <Marker position={{ lat: place.lat, lng: place.long }}/>}
 
             </GoogleMap>
         </LoadScript>
