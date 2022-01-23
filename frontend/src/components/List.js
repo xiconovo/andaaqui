@@ -1,13 +1,5 @@
-import React from 'react';
-
-export default function List({places}) {
-    const executePlaces = async () =>{
-        
-    }
-
-
-
-    const nameList = places.map(place => <h2>{place.name}</h2>)
+export default function List({places, selectPlace}) {
+  const nameList = places.map(place => <h2 onClick={()=> {console.log(place);selectPlace(place)}}>{place.name}</h2>)
   return (
     <div className='vertical-menu'>
     <h1 className='active'>Places</h1>

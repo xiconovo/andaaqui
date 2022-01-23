@@ -2,11 +2,17 @@ import React from 'react'
 import { useState } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
+import mapStyles from './mapStyles.json';
+
 
 const mapContainerStyle = {
     position: 'static!important',
     width: '70vw',
     height: 'calc(100vh-61px)'
+};
+
+const defaultMapOptions = {
+    styles: mapStyles
 };
 
 function Map({ coordinates, setCord }) {
@@ -23,6 +29,7 @@ function Map({ coordinates, setCord }) {
                 center={coordinates}
                 clickableIcons={false}
                 zoom={15}
+                defaultOptions={defaultMapOptions}
                 onClick={(event) => {
                     setCord({ lat: event.latLng.lat(), long: event.latLng.lng() })
                     setMarker({

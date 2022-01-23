@@ -1,6 +1,7 @@
 import React from 'react';
 import Map from './Map';
 import List from './List';
+import Place from './Place'
 import useGeoLocation from './useGeoLocation';
 import { useState } from 'react'
 
@@ -9,6 +10,7 @@ const MapList = () => {
   const [cordinates, setCordinates] = useState({ lat: location.coordinates.lat, long: location.coordinates.lng })
   const [radius, setRadius] = useState(1)
   const [places, setPlaces] = useState([])
+  const [selectedPlace, setSelectedPlace] = useState(null)
 
   const executeSearchPlaces = async (coord, radius) => {
     console.log("SearchPlaces", coord, radius)
@@ -38,6 +40,7 @@ const MapList = () => {
 
   return <div className='mapalista'>
     <Map coordinates={location.coordinates} setCord={setCordinates} />
+    { selectedPlace != null && <Place place={selectedPlace} selectPlace={setSelectedPlace}/>}
     <div>
       <div style={{display: "flex"}}>
         <div>
@@ -55,7 +58,7 @@ const MapList = () => {
           </div>
         </div>
       </div>
-      <List places={places} />
+      <List places={places} selectPlace={setSelectedPlace}/>
     </div>
 
   </div>;
