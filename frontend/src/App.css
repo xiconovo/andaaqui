@@ -126,3 +126,33 @@ body {
     color: #969292;
     font-size: 16px;
 }
+
+.vertical-menu {
+  display: block;
+  width: 30vw;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.vertical-menu h2{
+  background-color: #eee;
+  border-color: black;
+  color: black;
+  display: block;
+  padding: 12px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.vertical-menu h2:hover {
+  background-color: #ccc;
+}
+
+.active{
+  background-color: #2591bb;
+  color: white;
+}
+
+.mapalista{
+  display: flex;
+}

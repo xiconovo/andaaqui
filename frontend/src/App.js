@@ -3,8 +3,7 @@ import { useState, useEffect } from 'react'
 import HeaderLogin from './components/HeaderLogin'
 import BodySignup from './components/BodySignup'
 import HeaderLoggedIn from './components/HeaderLoggedIn';
-import BodyMap from './components/BodyMap';
-
+import MapList from './components/MapList';
 
 
 // https://github.com/bradtraversy/react-crash-2021
@@ -89,7 +88,7 @@ const App = () => {
     <>
       {isLogged ? <>
         <HeaderLoggedIn username={username} onLogout={executeLogout} />
-        <BodyMap />
+        <MapList/>
       </> :
         <>
           <HeaderLogin onLogin={executeLogin} />
