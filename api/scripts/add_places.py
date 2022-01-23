@@ -1,0 +1,17 @@
+import csv
+import sys
+import sqlite3
+
+# python3 add_places.py Places.csv ../db.sqlite 
+
+with open(sys.argv[1]) as csvfile:
+    con = sqlite3.connect(sys.argv[2])
+    cur = con.cursor()
+    reader = csv.reader(csvfile, delimiter=',')
+    next(reader, None)  # skip the header
+    for row in reader:
+        print(f"Adding: {row[0]}")
+        cur.execute(f"INSERT INTO place (name, lat, long) VALUES (?, ?, ?)", (row[0], row[1], row[2]))
+
+    con.commit()
+    con.close()

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import HeaderLogin from './components/HeaderLogin'
 import BodySignup from './components/BodySignup'
 import HeaderLoggedIn from './components/HeaderLoggedIn';
+import BodyMap from './components/BodyMap';
 
 
 
