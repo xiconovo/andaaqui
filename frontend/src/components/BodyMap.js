@@ -1,4 +1,4 @@
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
+import { Wrapper} from "@googlemaps/react-wrapper";
 
 const BodyMap = () => {
     const render = (status) => {

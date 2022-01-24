@@ -15,9 +15,9 @@ const Place = ({ place, selectPlace, trace }) => {
                     {place.name}
             </div>
             <StarRating rating={place.rating} />
-            <p className="info">Adicionar a uma Lista</p>
-            <p className="info" onClick={() => { console.log("set trace"); trace(true) }}>Direções</p>
-            <p className="info"> Comentários</p>
+            <p className="info">Add to a List</p>
+            <p className="info" onClick={() => { console.log("set trace"); trace(true) }}>Trace Route</p>
+            <p className="info">Comment</p>
         </div>
     );
 };

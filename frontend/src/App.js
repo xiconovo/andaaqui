@@ -5,16 +5,12 @@ import BodySignup from './components/BodySignup'
 import HeaderLoggedIn from './components/HeaderLoggedIn';
 import MapList from './components/MapList';
 
-
-// https://github.com/bradtraversy/react-crash-2021
-
 const App = () => {
   const [isLogged, setIsLogged] = useState(false)
   const [username, setUsername] = useState('')
 
 
   const executeLogin = async (user) => {
-    console.log("User", user)
     const res = await fetch('http://localhost:8080/login', {
       method: 'POST',
       credentials: 'include',
@@ -30,28 +26,22 @@ const App = () => {
       alert('Login failed')
     }
     // const data = await res.json()
-    console.log("login res", isLogged)
   }
 
   const isLoggedIn = async () => {
     const res = await fetch('http://localhost:8080/auth', {
       credentials: 'include'
     })
-    console.log("RES", res)
     if (res.status === 200) {
       const data = await res.json()
-      console.log("is login res123", data)
       setIsLogged(true)
       setUsername(data.username)
     } else {
-      console.log("xico nabo else")
       setIsLogged(false)
     }
-    console.log("is login res", isLogged, username)
   }
 
   const executeRegister = async (user) => {
-    console.log("Register User", user)
     const res = await fetch('http://localhost:8080/register', {
       method: 'POST',
       headers: {
