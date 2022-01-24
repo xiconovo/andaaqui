@@ -1,32 +1,25 @@
 import { useEffect, useState } from "react";
 
-const useGeoLocation = (setCoordinates) => {
+const useGeoLocation = () => {
     const [location, setLocation] = useState({
-        loaded: false,
-        coordinates: { lat: 41.56150781511613, lng: -8.39725418760858 }
+        lat: 0,
+        lng: 0
     });
 
     const onSucess = (location) => {
+        console.log("got location",location)
         setLocation({
-            loaded: true,
-            coordinates: {
-                lat: location.coords.latitude,
-                lng: location.coords.longitude,
-            },
+            lat: location.coords.latitude,
+            lng: location.coords.longitude,
         });
-        setCoordinates({lat: location.coords.latitude, lng: location.coords.longitude})
     };
 
     const onError = (error) => {
+        console.log("rip location",error)
         setLocation({
-            loaded: true,
-            coordinates: {
-                lat: 41.56150781511613,
-                lng: -8.39725418760858
-            },
-            error,
+            lat: 41.56150781511613,
+            lng: -8.39725418760858
         });
-        setCoordinates({lat:41.56150781511613, lng: -8.39725418760858})
     }
 
     useEffect(() => {
@@ -35,9 +28,20 @@ const useGeoLocation = (setCoordinates) => {
                 code: 0,
                 message: "Geolocation not supported"
             });
+        } else {
+            navigator.permissions.query({ name: 'geolocation' }).then(function (result) {
+                if (result.state === 'granted') {
+                    navigator.geolocation.getCurrentPosition(onSucess, onError);
+                } else {
+                    console.log("no location permissions")
+                    setLocation({
+                        lat: 41.56150781511613,
+                        lng: -8.39725418760858
+                    });
+                }
+            });
         }
-        navigator.geolocation.getCurrentPosition(onSucess, onError);
-    });
+    }, []);
 
     return location;
 }

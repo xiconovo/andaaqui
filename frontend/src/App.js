@@ -4,6 +4,7 @@ import HeaderLogin from './components/HeaderLogin'
 import BodySignup from './components/BodySignup'
 import HeaderLoggedIn from './components/HeaderLoggedIn';
 import MapList from './components/MapList';
+import useGeoLocation from './components/useGeoLocation';
 
 const App = () => {
   const [isLogged, setIsLogged] = useState(false)
@@ -75,11 +76,13 @@ const App = () => {
     isLoggedIn()
   }, [])
 
+  const location = useGeoLocation();
+
   return (
     <>
       {isLogged ? <>
         <HeaderLoggedIn username={username} onLogout={executeLogout} />
-        <MapList />
+        <MapList location={location}/>
       </> :
         <>
           <HeaderLogin onLogin={executeLogin} />
