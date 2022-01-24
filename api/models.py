@@ -23,6 +23,7 @@ class Place(db.Model):
     name = db.Column(db.String(80), nullable=False, unique=True)
     lat = db.Column(db.Float, nullable=False)
     long = db.Column(db.Float, nullable=False)
+    rating = db.Column(db.Float, nullable=False)
     lists = db.relationship("List", secondary=list_entries, back_populates="places")
 
 
@@ -37,5 +38,12 @@ class List(db.Model):
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     comment = db.Column(db.String(200), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    place_id = db.Column(db.Integer, db.ForeignKey("place.id"), nullable=False)
+
+
+class Rating(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    rating = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     place_id = db.Column(db.Integer, db.ForeignKey("place.id"), nullable=False)

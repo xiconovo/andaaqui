@@ -4,7 +4,7 @@ from flask_login import (
     login_required,
     current_user,
 )
-from models import db, Comment
+from models import db, Comment, Place
 
 
 comments_bp = Blueprint("comment", __name__, url_prefix="/comment")
@@ -21,6 +21,10 @@ def comment_place():
         return {"status": "failed", "msg": "Invalide request body"}, 401
 
     try:
+        place = Place.query.filter_by(id=place_id).first()
+        if place is None:
+            return {"status": "failed", "msg": "Invalid place"}, 401
+
         new_comment = Comment(
             comment=comment, user_id=current_user.id, place_id=place_id
         )

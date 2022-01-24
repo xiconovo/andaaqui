@@ -2,7 +2,7 @@ from flask import Blueprint, request
 from flask_login import (
     login_required,
 )
-from models import db, Place, list_entries
+from models import Rating, db, Place, list_entries, Rating
 from sqlalchemy.sql import text
 
 places_bp = Blueprint("places", __name__, url_prefix="/places")
@@ -32,7 +32,7 @@ def search():
     return {
         "status": "ok",
         "places": [
-            {"id": place.id, "name": place.name, "lat": place.lat, "long": place.long}
+            {"id": place.id, "name": place.name, "lat": place.lat, "long": place.long, "rating": round(place.rating,1)}
             for place in places
         ],
     }, 200
@@ -50,7 +50,7 @@ def create():
         return {"status": "failed", "msg": "Ivalid request body"}, 401
 
     try:
-        new_place = Place(name=name, lat=lat, long=long)
+        new_place = Place(name=name, lat=lat, long=long, rating=0)
         db.session.add(new_place)
         db.session.commit()
     except Exception as e:
@@ -73,6 +73,7 @@ def delete():
         place_query = Place.query.filter_by(name=name)
         place = place_query.first()
         db.session.query(list_entries).filter_by(place_id=place.id).delete()
+        db.session.query(Rating).filter_by(place_id=place.id).delete()
         place_query.delete()
         db.session.commit()
     except Exception as e:
