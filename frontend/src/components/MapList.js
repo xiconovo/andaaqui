@@ -6,12 +6,13 @@ import useGeoLocation from './useGeoLocation';
 import { useState } from 'react'
 
 const MapList = () => {
-  const [cordinates, setCordinates] = useState({ lat: 0, long: 0 })
+  const [cordinates, setCordinates] = useState({ lat: 0, lng: 0 })
   const location = useGeoLocation(setCordinates);
   const [center, setCenter] = useState({ lat: location.coordinates.lat, lng: location.coordinates.lng })
   const [radius, setRadius] = useState(1)
   const [places, setPlaces] = useState([])
   const [selectedPlace, setSelectedPlace] = useState(null)
+  const [showDirections, setShowDirections] = useState(false)
 
   const executeSearchPlaces = async (coord, radius) => {
     console.log("SearchPlaces", coord, radius)
@@ -21,7 +22,7 @@ const MapList = () => {
       headers: {
         'Content-type': 'application/json',
       },
-      body: JSON.stringify({ ...coord, radius }),
+      body: JSON.stringify({ lat: cordinates.lat, long: cordinates.lng, radius }),
     })
     console.log("RES", res)
     if (res.status === 200) {
@@ -41,8 +42,8 @@ const MapList = () => {
 
   return <div className='mapalista'>
     <div className='mapbody'>
-      <Map coordinates={location.coordinates} setCord={setCordinates} place={selectedPlace} center={center}/>
-      {selectedPlace != null && <Place place={selectedPlace} selectPlace={setSelectedPlace} />}
+      <Map coordinates={cordinates} setCord={setCordinates} place={selectedPlace} center={center} showDirections={showDirections}/>
+      {selectedPlace != null && <Place place={selectedPlace} selectPlace={setSelectedPlace} trace={setShowDirections}/>}
     </div>
     <div className='listbody'>
       <div style={{ display: "flex" }}>

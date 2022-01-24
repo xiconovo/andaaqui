@@ -26,6 +26,7 @@ const useGeoLocation = (setCoordinates) => {
             },
             error,
         });
+        setCoordinates({lat:41.56150781511613, lng: -8.39725418760858})
     }
 
     useEffect(() => {
