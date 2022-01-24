@@ -55,7 +55,7 @@ function Map({ coordinates, setCord, place, center, showDirections }) {
                     center={center}
                     clickableIcons={false}
                     zoom={15}
-                    defaultOptions={defaultMapOptions}
+                    options={defaultMapOptions}
                     onClick={(event) => {
                         setCord({ lat: event.latLng.lat(), lng: event.latLng.lng() })
                         setMarker({
