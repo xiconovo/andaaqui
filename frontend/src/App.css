@@ -173,7 +173,7 @@ input .input-radius {
 }
 
 .active{
-  background-color: #2591bb;
+  background-color:rgb(9, 36, 58);
   color: white;
 }
 
@@ -198,4 +198,40 @@ input .input-radius {
 
 .search-button {
   margin-left: 0;
+}
+
+.headerPlace{
+  width: 300px;
+  background-color: #eee;
+  border-left-color: black;
+  border-left: solid;
+  border-right-color: black;
+  border-right: solid;
+  border-width: 1px;
+  padding: 10px;
+}
+
+.namePlace{
+  text-align: center;
+  font-size: 25px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  font-weight: bold;
+  border-bottom: solid 1px;
+  border-bottom-color: black;
+}
+
+.info{
+  cursor: pointer;
+  font: Arial;
+  color: rgb(9, 36, 58);
+  font-size: 20px;
+}
+
+.info:hover{
+  background-color: #ccc;
+}
+
+.starRating{
+  margin-bottom: 20px;
 }
