@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { DirectionsRenderer, DirectionsService, GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 import mapStyles from './mapStyles.json';
 
@@ -18,7 +18,38 @@ const defaultMapOptions = {
 function Map({ coordinates, setCord, place }) {
     const [marker, setMarker] = useState({});
     const [isMarked, setIsMarked] = useState(false);
+    const [response, setResponse] = useState(null);
+    const [origin, setOrigin] = useState({});
+    const [destination, setDestination] = useState({});
 
+    const traceRoute = () => {
+        if (coordinates && place) {
+            setOrigin(coordinates);
+            setDestination(place);
+        }
+    };
+
+    const directionsServiceOptions = (() =>{
+            return {
+                origin,
+                destination,
+                travelMode: 'DRIVING',
+            };
+        }, [origin, destination]);
+
+    const directionsCallback = React.useCallback((res) => {
+        if (res !== null && res.status === "OK") {
+            setResponse(res);
+        } else {
+            console.log(res);
+        }
+    }, []);
+
+    const directionsRendererOptions = React.useMemo(() => {
+        return {
+            directions: response,
+        };
+    }, [response]);
 
     return (
         <LoadScript
@@ -46,8 +77,15 @@ function Map({ coordinates, setCord, place }) {
                 />}
 
                 {place != null && <Marker position={{ lat: place.lat, lng: place.long }}/>}
-
             </GoogleMap>
+            <button onClick={traceRoute}>Trace Route</button>
+            {origin && destination && (
+                <DirectionsService options={directionsServiceOptions} callback={directionsCallback}/>
+            )}
+
+            {response && directionsRendererOptions && (
+            <DirectionsRenderer options={directionsRendererOptions}/>
+            )}
         </LoadScript>
     )
 }
