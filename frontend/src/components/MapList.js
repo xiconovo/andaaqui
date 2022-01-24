@@ -6,8 +6,9 @@ import useGeoLocation from './useGeoLocation';
 import { useState } from 'react'
 
 const MapList = () => {
-  const location = useGeoLocation();
-  const [cordinates, setCordinates] = useState({ lat: location.coordinates.lat, long: location.coordinates.lng })
+  const [cordinates, setCordinates] = useState({ lat: 0, long: 0 })
+  const location = useGeoLocation(setCordinates);
+  const [center, setCenter] = useState({ lat: location.coordinates.lat, lng: location.coordinates.lng })
   const [radius, setRadius] = useState(1)
   const [places, setPlaces] = useState([])
   const [selectedPlace, setSelectedPlace] = useState(null)
@@ -39,8 +40,8 @@ const MapList = () => {
 
 
   return <div className='mapalista'>
-    <div class='mapbody'>
-      <Map coordinates={location.coordinates} setCord={setCordinates} place={selectedPlace} />
+    <div className='mapbody'>
+      <Map coordinates={location.coordinates} setCord={setCordinates} place={selectedPlace} center={center}/>
       {selectedPlace != null && <Place place={selectedPlace} selectPlace={setSelectedPlace} />}
     </div>
     <div className='listbody'>
@@ -60,7 +61,7 @@ const MapList = () => {
           </div>
         </div>
       </div>
-      <List places={places} selectPlace={setSelectedPlace} />
+      <List places={places} selectPlace={setSelectedPlace} setCenter={setCenter} />
     </div>
 
   </div>;

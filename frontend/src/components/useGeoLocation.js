@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-const useGeoLocation = () => {
+const useGeoLocation = (setCoordinates) => {
     const [location, setLocation] = useState({
         loaded: false,
-        coordinates: { lat: "", lng: "" }
+        coordinates: { lat: 41.56150781511613, lng: -8.39725418760858 }
     });
 
     const onSucess = (location) => {
@@ -14,6 +14,7 @@ const useGeoLocation = () => {
                 lng: location.coords.longitude,
             },
         });
+        setCoordinates({lat: location.coords.latitude, lng: location.coords.longitude})
     };
 
     const onError = (error) => {
@@ -35,7 +36,7 @@ const useGeoLocation = () => {
             });
         }
         navigator.geolocation.getCurrentPosition(onSucess, onError);
-    }, []);
+    });
 
     return location;
 }

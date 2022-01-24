@@ -15,7 +15,7 @@ const defaultMapOptions = {
     styles: mapStyles
 };
 
-function Map({ coordinates, setCord, place }) {
+function Map({ coordinates, setCord, place, center }) {
     const [marker, setMarker] = useState({});
     const [isMarked, setIsMarked] = useState(false);
     const [response, setResponse] = useState(null);
@@ -29,13 +29,13 @@ function Map({ coordinates, setCord, place }) {
         }
     };
 
-    const directionsServiceOptions = (() =>{
-            return {
-                origin,
-                destination,
-                travelMode: 'DRIVING',
-            };
-        }, [origin, destination]);
+    const directionsServiceOptions = (() => {
+        return {
+            origin,
+            destination,
+            travelMode: 'DRIVING',
+        };
+    }, [origin, destination]);
 
     const directionsCallback = React.useCallback((res) => {
         if (res !== null && res.status === "OK") {
@@ -57,7 +57,8 @@ function Map({ coordinates, setCord, place }) {
         >
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
-                center={coordinates}
+                initialCenter={coordinates}
+                center={center}
                 clickableIcons={false}
                 zoom={15}
                 defaultOptions={defaultMapOptions}
@@ -76,15 +77,15 @@ function Map({ coordinates, setCord, place }) {
                     position={{ lat: marker.lat, lng: marker.lng }}
                 />}
 
-                {place != null && <Marker position={{ lat: place.lat, lng: place.long }}/>}
+                {place != null && <Marker position={{ lat: place.lat, lng: place.long }} />}
             </GoogleMap>
             <button onClick={traceRoute}>Trace Route</button>
             {origin && destination && (
-                <DirectionsService options={directionsServiceOptions} callback={directionsCallback}/>
+                <DirectionsService options={directionsServiceOptions} callback={directionsCallback} />
             )}
 
             {response && directionsRendererOptions && (
-            <DirectionsRenderer options={directionsRendererOptions}/>
+                <DirectionsRenderer options={directionsRendererOptions} />
             )}
         </LoadScript>
     )
